@@ -1,0 +1,39 @@
+server:
+  port: 9100
+
+spring:
+  application:
+    name: cloud-zuul
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-7900:7900/eureka/
+    enabled: true
+  instance:
+    hostname: localhost
+    instance-id: cloud-zuul
+zuul:
+  #一下配置，表示忽略下面的值向微服务传播，以下配置为空表示：所有请求头都透传到后面微服务。
+  sensitive-headers:
+  routes:
+    #此处名字随便取
+    custom-zuul-name:
+      path: /zuul-custom-name/**
+      service-id: service-sms
+#service-sms:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.kennedy.cloudzuul.gray.GrayRule
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    health:
+#      ##默认是never
+#      show-details: ALWAYS
+#      enabled: true
+#    routes:
+#      enabled: true
